@@ -1,35 +1,34 @@
-const Person = require('../src/person')
-const Institution = require('../src/institution')
-
-
- 
+const Person = require('../src/person');
+const Institution = require('../src/institution');
 
 describe("Person Test Cases", () => {
-
- test("Given_NewPerson_When_All_ConditionsMet_Then_ReturnTrue", () => {
-
-    // Given 
-    // My assumption
-    // Create an institution (of learning)
-    // Institution.
-    const testInstitution = new Institution('Quinnipiac Uniiversity' , 'qu.edu')
+  testInstitution = null
+  testPerson = null
 
 
-        //When 
-        //The actions necessary tto complete the test case 
-        //create and validate a Person 
-        const testPerson = new Person('lastName', 'firstName','1/1/2024', 'student_username','affiliation')
+  beforeEach(() => {
 
-        //Then 
-        //Condition verifying expect(2 + 2).toBe(4);
-        expect(2 + 2).toBe(4)
-  
+    testInstitution = new Institution('Quinnipiac University', 'qu.edu');
+    testPerson = new Person('James', 'LeBron', testInstitution,
+      '1/1/2024', 'LeBron.James', 'Student');
 
-   // assertions
+  });
 
+  test("Check Email Formation", () => {
 
-
- });
+    const email = testPerson.email;
 
 
-})
+    expect(email).toBe('LeBron.James@qu.edu');
+  });
+
+  test("Verify toString Output", () => {
+    const personString = testPerson.toString();
+
+    expect(personString).toContain('Student Name: LeBron James');
+    expect(personString).toContain('School: Quinnipiac University');
+    expect(personString).toContain('Username: LeBron.James');
+    expect(personString).toContain('affiliation: Student');
+  });
+
+});

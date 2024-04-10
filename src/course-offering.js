@@ -11,12 +11,12 @@ class CourseOffering {
     this.grades = {}
   }
 
-  register_students (students) {
+  register_students(students) {
     for (const student of students) {
-      this.registered_students.push(student)
-      student.course_list.push(this)
-    }
+      this.registered_students.push(student);
+      student.courseList.push(this);   }
   }
+  
 
   get_students () {
     return this.registered_students

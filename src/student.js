@@ -1,20 +1,21 @@
 const Person = require('./person.js') // Assuming person.js contains the Person class
 
 class Student extends Person {
-  constructor (lastName, firstName, school, dateOfBirth, username) {
-    super(lastName, firstName, school, dateOfBirth, username, 'student')
+  constructor (lastName, firstName, school, dateOfBirth, userName) {
+    super(lastName, firstName, school, dateOfBirth, userName, 'student')
     this.courseList = [] // list of offering objects
     this.transcript = {} // course:grade
   }
 
   list_courses () {
     const ordered = Object.keys(this.transcript)
-      .sort((a, b) => {
-        const yearComparison = b.year - a.year
-        if (yearComparison !== 0) return yearComparison
-        return b.quarter - a.quarter
-      })
-    return ordered
+    .sort((a, b) => {
+      const yearComparison = this.transcript[b].year - this.transcript[a].year;
+      if (yearComparison !== 0) return yearComparison;
+      return this.transcript[b].quarter - this.transcript[a].quarter;
+    });
+  return ordered;
+  
   }
 
   get credits () {

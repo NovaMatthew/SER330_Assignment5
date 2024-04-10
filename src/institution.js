@@ -14,9 +14,11 @@ class Institution {
   }
 
   listStudents () {
-    console.log(`\nEnrolled Students (${this.name})\n-------------------------------------------`)
+    console.log(`\nEnrolled Students (${this.name})
+    \n-------------------------------------------`)
 
-    const studentList = Object.values(this.studentList).map(student => `${student.lastName}, ${student.firstName}`)
+    const studentList = Object.values(this.studentList).map(
+      student => `${student.lastName}, ${student.firstName}`)
     const sortedStudentList = studentList.sort()
 
     sortedStudentList.forEach(student => console.log(student))
@@ -27,7 +29,8 @@ class Institution {
   enroll_student (student) {
     if (student instanceof Student) {
       if (student.username in this.studentList) {
-        console.log(`${student.firstName} ${student.lastName} is already enrolled!`)
+        console.log(`${student.firstName} ${student.lastName} 
+        is already enrolled!`)
       } else {
         this.studentList[student.userName] = student
       }
@@ -36,12 +39,17 @@ class Institution {
     }
   }
 
-  register_student_for_course (student, courseName, dept, number, sectionNumber, year, quarter) {
+  register_student_for_course (student, courseName, dept, number, 
+    sectionNumber, year, quarter) {
     for (const offering of this.courseSchedule[courseName]) {
-      if (dept === offering.course.department && number === offering.course.number && year === offering.year && quarter === offering.quarter && sectionNumber === offering.sectionNumber) {
+      if (dept === offering.course.department && number === 
+        offering.course.number && year === offering.year && 
+         quarter === offering.quarter && sectionNumber === 
+         offering.sectionNumber) {
         if (student in this.studentList) {
           if (offering.registered_students.includes(student)) {
-            console.log(`\n${student.first_name} ${student.last_name} is already enrolled in this course\n`)
+            console.log(`\n${student.first_name} 
+            ${student.last_name} is already enrolled in this course\n`)
           } else {
             offering.register_students([student])
           }
@@ -51,8 +59,10 @@ class Institution {
   }
 
   list_instructors () {
-    console.log(`\nInstructor List (${this.name})\n-------------------------------------------`)
-    const facultyList = Object.values(this.facultyList).map(instructor => `${instructor.lastName}, ${instructor.firstName}`)
+    console.log(`\nInstructor List (${this.name})
+    \n-------------------------------------------`)
+    const facultyList = Object.values(this.facultyList).map(instructor =>
+      `${instructor.lastName}, ${instructor.firstName}`)
     const sortedFacultyList = facultyList.sort()
     sortedFacultyList.forEach(instructor => console.log(instructor))
     console.log('\n')
@@ -61,7 +71,8 @@ class Institution {
   hire_instructor (instructor) {
     if (instructor instanceof Instructor) {
       if (instructor.username in this.facultyList) {
-        console.log(`${instructor.firstName} ${instructor.lastName} already works at this institution!`)
+        console.log(`${instructor.firstName} ${instructor.lastName}
+         already works at this institution!`)
       } else {
         this.facultyList[instructor.userName] = instructor
       }
@@ -70,15 +81,20 @@ class Institution {
     }
   }
 
-  assign_instructor (instructor, courseName, dept, number, sectionNumber, year, quarter) {
+  assign_instructor (instructor, courseName, dept, number, sectionNumber, 
+    year, quarter) {
     for (const offering of this.courseSchedule[courseName]) {
-      if (dept === offering.course.department && number === offering.course.number && year === offering.year && quarter === offering.quarter && sectionNumber === offering.sectionNumber) {
+      if (dept === offering.course.department && number === 
+        offering.course.number && year === offering.year && quarter === 
+        offering.quarter && sectionNumber === offering.sectionNumber) {
         if (offering.instructor === instructor) {
-          console.log(`${instructor.first_name} ${instructor.last_name} is already teaching this course`)
+          console.log(`${instructor.first_name} ${instructor.last_name} 
+          is already teaching this course`)
         } else {
           offering.instructor = instructor
           instructor.courseList.push(offering)
-          console.log(`${instructor.firstName} ${instructor.lastName} has been assigned to teach ${offering}`)
+          console.log(`${instructor.firstName} ${instructor.lastName} 
+          has been assigned to teach ${offering}`)
         }
       } else {
         console.log('Course not found. Please create a course and course offering')
@@ -87,7 +103,8 @@ class Institution {
   }
 
   list_course_catalog () {
-    console.log(`\nCourse Catalog (${this.name})\n----------------------------------------`)
+    console.log(`\nCourse Catalog (${this.name})
+    \n----------------------------------------`)
     for (const course of Object.values(this.courseCatalog)) {
       console.log(course)
     }
